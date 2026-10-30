@@ -19,5 +19,5 @@ Restyled with a terracotta and cream theme, Fraunces headings and Nunito Sans bo
 - `practice/` – practice drills
 
 ## Team
-- [NAME 1] – [ADMISSION NO.]
-- [NAME 2] – [ADMISSION NO.]
+- [Sean Githongo] – [227632]
+- [Quentine Trengove] – [226642]
