@@ -1,0 +1,18 @@
+{% extends 'base.html' %}{% block body %}<div class="card"><h1>{{ {'student':'Student','business':'Business buyer','consumer':'Consumer'}[role] }}: tell us your scenario</h1>
+<form method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><div class="grid g2"><div>
+{% if role == 'student' %}<label>Course</label><select name="course" required><option value="">Select course</option>{% for c in courses %}<option {{ 'selected' if prof.course == c }}>{{ c }}</option>{% endfor %}</select>
+<label>Workload</label><select name="workload" required>{% for w in ['Light','Moderate','Heavy'] %}<option {{ 'selected' if prof.est_workload == w }}>{{ w }}</option>{% endfor %}</select>
+{% elif role == 'business' %}<label>Service model</label><select name="service" required>{% for c in services %}<option {{ 'selected' if prof.service_model == c }}>{{ c }}</option>{% endfor %}</select>
+<label>Team size (laptops needed)</label><input type="number" name="team_size" min="1" required value="{{ prof.team_size or '' }}">
+<label>Sourcing hub</label><select name="hub">{% for h in ['Any','Local','Dubai'] %}<option>{{ h }}</option>{% endfor %}</select>
+{% else %}<label>Daily needs</label><select name="needs" required>{% for c in needs %}<option {{ 'selected' if prof.daily_needs == c }}>{{ c }}</option>{% endfor %}</select>
+<label>Price range</label><select name="range" required>{% for c in ranges %}<option {{ 'selected' if prof.price_range == c }}>{{ c }}</option>{% endfor %}</select>
+<label>Form factor</label><select name="form"><option>Standard</option><option>Lightweight</option><option>Large screen</option></select>{% endif %}
+{% if role != 'consumer' %}<label>{{ 'Department budget' if role == 'business' else 'Budget cap' }} (KES): <b id="bv">80,000</b></label>
+<input type="range" id="r" min="20000" max="{{ 3000000 if role == 'business' else 300000 }}" step="5000" value="80000"><input type="number" name="budget" id="b" min="0" required value="80000">{% endif %}
+</div><div><label>Preferred OS</label><div class="pills">{% for o in ['Windows','macOS','Linux','No pref.'] %}<label><input type="radio" name="os" value="{{ o }}" {{ 'checked' if o == 'No pref.' }}>{{ o }}</label>{% endfor %}</div>
+<label>Minimum storage</label><div class="pills">{% for s in storage %}<label><input type="radio" name="storage" value="{{ s }}" {{ 'checked' if s == '256 GB' }}>{{ s }}</label>{% endfor %}</div>
+{% if role != 'consumer' %}<label>Ergonomics</label><div class="pills">{% for e in ['Light weight','Big screen','Long battery'] %}<label><input type="checkbox" name="erg" value="{{ e }}">{{ e }}</label>{% endfor %}</div>{% endif %}</div></div>
+<p><button class="btn">Get recommendations</button></p></form></div>
+<script>const r=document.getElementById('r'),b=document.getElementById('b'),v=document.getElementById('bv');
+if(r){r.oninput=()=>{b.value=r.value;v.textContent=(+r.value).toLocaleString()};b.oninput=()=>{r.value=b.value;v.textContent=(+b.value||0).toLocaleString()}}</script>{% endblock %}

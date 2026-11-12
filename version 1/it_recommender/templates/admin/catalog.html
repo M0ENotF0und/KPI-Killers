@@ -1,0 +1,8 @@
+{% extends 'admin/layout.html' %}{% block content %}<h1>Hardware catalog</h1><form method="get" style="display:flex;gap:8px"><input name="q" value="{{ q }}" placeholder="Search brand, model, vendor..."><button class="btn">Search</button></form>
+<p><a class="btn" href="{{ url_for('admin_product') }}">+ Add item</a></p>
+<form method="post" action="{{ url_for('admin_import') }}" enctype="multipart/form-data" class="card"><input type="hidden" name="csrf" value="{{ csrf }}"><b>Bulk import (CSV)</b> <input type="file" name="file" accept=".csv" required style="width:auto"> <button class="btn sec sm">Upload</button>
+<div class="muted">Columns: vendor_id,category,brand,model,os,ram_gb,storage_gb,battery_hrs,weight_kg,screen_in,cpu_tier,price,stock</div></form>
+<table><tr><th>Item</th><th>Category</th><th>Vendor</th><th>Price</th><th>Stock</th><th>Actions</th></tr>
+{% for r in rows %}<tr><td>{{ jl(r.specs).model }}</td><td>{{ r.category }}</td><td>{{ r.vendor }} ({{ r.hub }})</td><td>{{ r.currency }} {{ r.price|kes }}</td><td>{{ r.stock_qty }}{% if r.stock_qty < 5 %} <span class="badge" style="background:#ffd6dd">low</span>{% endif %}</td>
+<td><a href="{{ url_for('admin_product', pid=r.product_id) }}">edit</a> | <form class="inline" method="post" action="{{ url_for('admin_product_del', pid=r.product_id) }}" onsubmit="return confirm('Delete this item?')"><input type="hidden" name="csrf" value="{{ csrf }}"><button style="background:none;border:0;color:var(--err);cursor:pointer;font:inherit;padding:0">delete</button></form></td></tr>{% endfor %}</table>
+<p class="muted">Changes are written to the audit log.</p>{% endblock %}

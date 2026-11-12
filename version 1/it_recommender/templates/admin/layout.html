@@ -1,0 +1,3 @@
+{% extends 'base.html' %}{% block body %}<div class="admin"><div class="side"><b>Admin</b>
+{% for e,l in [('admin_home','Dashboard'),('admin_catalog','Catalog'),('admin_rates','Prices & rates'),('admin_rules','Rules'),('admin_users','Users'),('admin_report','Reports'),('admin_audit','Audit logs'),('admin_backup','Backups')] %}<a href="{{ url_for(e) }}" class="{{ 'on' if request.endpoint == e }}">{{ l }}</a>{% endfor %}</div>
+<div>{% block content %}{% endblock %}</div></div>{% endblock %}

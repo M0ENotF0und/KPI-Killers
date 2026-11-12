@@ -1,0 +1,4 @@
+{% extends 'base.html' %}{% block body %}<h1>Wishlist</h1><div class="card"><table><tr><th>Laptop</th><th>Vendor</th><th>Price</th><th></th></tr>
+{% for r in rows %}<tr><td>{{ jl(r.specs).model }}</td><td>{{ r.vendor }} ({{ r.hub }})</td><td>{{ r.currency }} {{ r.price|kes }}</td><td><a href="{{ r.purchase_url }}" target="_blank" rel="noopener">Buy</a>
+<form class="inline" method="post" action="{{ url_for('wishlist_del', sid=r.saved_id) }}"><input type="hidden" name="csrf" value="{{ csrf }}"> <button class="btn red sm">Remove</button></form></td></tr>
+{% else %}<tr><td colspan="4">Nothing saved yet.</td></tr>{% endfor %}</table></div>{% endblock %}

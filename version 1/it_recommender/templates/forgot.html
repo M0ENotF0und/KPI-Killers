@@ -1,0 +1,4 @@
+{% extends 'base.html' %}{% block body %}<div class="card auth"><h1>Forgot password</h1>
+{% if link %}<div class="flash ok">Reset link generated (valid 30 minutes, single use). In production this would be emailed; for this prototype use it here:</div><p><a class="btn" href="{{ link }}">Reset my password</a></p>
+{% else %}<form method="post"><label>Account email</label><input type="email" name="email" required><p><button class="btn" style="width:100%">Get reset link</button></p></form>{% endif %}
+<a href="{{ url_for('login') }}">Back to login</a></div>{% endblock %}

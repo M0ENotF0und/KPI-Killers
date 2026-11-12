@@ -1,0 +1,2 @@
+{% extends 'admin/layout.html' %}{% block content %}<div class="grid g3"><div class="stat"><b>{{ s.items }}</b>Items</div><div class="stat" style="background:#ffd6dd"><b>{{ s.alerts }}</b>Low-stock alerts</div><div class="stat"><b>{{ s.users }}</b>Users</div><div class="stat"><b>{{ s.scenarios }}</b>Scenarios</div></div>
+<p class="muted">Last backup: {{ s.backup }}</p><div class="card"><h2>Recent activity</h2><table>{% for a in recent %}<tr><td>{{ a.logged_at|dt }}</td><td>{{ a.full_name or '-' }}</td><td>{{ a.action }}</td></tr>{% endfor %}</table></div>{% endblock %}

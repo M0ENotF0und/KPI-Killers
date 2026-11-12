@@ -1,0 +1,1 @@
+{% extends 'admin/layout.html' %}{% block content %}<h1>Audit logs</h1><table><tr><th>When</th><th>User</th><th>Action</th></tr>{% for a in rows %}<tr><td>{{ a.logged_at|dt }}</td><td>{{ a.full_name or '-' }}</td><td>{{ a.action }}</td></tr>{% endfor %}</table>{% endblock %}

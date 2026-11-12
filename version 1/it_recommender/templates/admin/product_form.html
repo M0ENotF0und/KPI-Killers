@@ -1,0 +1,9 @@
+{% extends 'admin/layout.html' %}{% block content %}{% set s = jl(p.specs) if p else {} %}{% set f = f or {} %}
+<h1>{{ 'Edit' if p else 'Add' }} item</h1><form method="post" class="card"><input type="hidden" name="csrf" value="{{ csrf }}"><div class="grid g2"><div>
+<label>Model</label><input name="model" required value="{{ f.model or s.model or '' }}"><label>Brand</label><input name="brand" required value="{{ f.brand or (p.brand if p else '') }}">
+<label>Category</label><select name="category">{% for c in ['Laptop','Accessory'] %}<option {{ 'selected' if p and p.category == c }}>{{ c }}</option>{% endfor %}</select>
+<label>Vendor</label><select name="vendor_id">{% for v in vendors %}<option value="{{ v.vendor_id }}" {{ 'selected' if p and p.vendor_id == v.vendor_id }}>{{ v.name }} ({{ v.hub }} - {{ 'KES' if v.hub == 'Local' else 'AED' }})</option>{% endfor %}</select>
+<label>Price (KES for Local vendors, AED for Dubai)</label><input type="number" step="0.01" min="0" name="price" required value="{{ f.price or (p.price if p else '') }}"><label>Stock</label><input type="number" min="0" name="stock" required value="{{ f.stock or (p.stock_qty if p else 0) }}"></div><div>
+<label>OS</label><select name="os">{% for o in ['Windows','macOS','Linux'] %}<option {{ 'selected' if s.os == o }}>{{ o }}</option>{% endfor %}</select>
+{% for k,l in [('ram_gb','RAM (GB)'),('storage_gb','Storage (GB)'),('battery_hrs','Battery (hrs)'),('weight_kg','Weight (kg)'),('screen_in','Screen (in)'),('cpu_tier','CPU tier (1-5)')] %}<label>{{ l }}</label><input type="number" step="any" min="0" name="{{ k }}" value="{{ f[k] or s[k] or 0 }}">{% endfor %}</div></div>
+<p><button class="btn">Save</button> <a href="{{ url_for('admin_catalog') }}">Cancel</a></p></form>{% endblock %}

@@ -1,0 +1,9 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IT Recommender</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body>
+<nav><a class="brand" href="/"><span class="dot"></span>IT Recommender</a>
+{% if not me %}<a href="{{ url_for('help_page') }}">Help</a>{% endif %}{% if me %}{% if me.role == 'admin' %}<a href="{{ url_for('admin_home') }}">Admin console</a>{% else %}
+<a href="{{ url_for('scenario') }}">Home</a><a href="{{ url_for('scenarios') }}">My scenarios</a><a href="{{ url_for('wishlist') }}">Wishlist</a>{% endif %}
+<a href="{{ url_for('help_page') }}">Help</a><span class="muted">{{ me.full_name }} ({{ me.role }})</span>
+<form method="post" action="{{ url_for('logout') }}"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="link">Logout</button></form>{% endif %}</nav>
+<main>{% with m = get_flashed_messages(with_categories=true) %}{% for c, t in m %}<div class="flash {{ c }}">{{ t }}</div>{% endfor %}{% endwith %}
+{% block body %}{% endblock %}</main></body></html>

@@ -1,0 +1,5 @@
+{% extends 'base.html' %}{% block body %}<div class="card auth"><h1>Welcome back</h1><p class="muted">Right laptop. Right price.</p>
+<form method="post"><label>Email</label><input type="email" name="email" required placeholder="name@email.com">
+<label>Password</label><input type="password" name="password" required><p><button class="btn" style="width:100%">Log in</button></p></form>
+<p><a href="{{ url_for('forgot') }}">Forgot password?</a></p><p>New here? <a href="{{ url_for('register') }}">Create account</a></p>
+<p class="muted">Demo: student@ / business@ / consumer@recommend.app (Demo1234!) &middot; admin@recommend.app (Admin123!)</p></div>{% endblock %}

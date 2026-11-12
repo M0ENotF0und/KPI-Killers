@@ -1,0 +1,2 @@
+{% extends 'admin/layout.html' %}{% block content %}<h1>Backups</h1><form method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><button class="btn">Create backup now</button></form>
+<p class="muted">JSON export of all tables (password hashes excluded). For production also schedule <code>pg_dump</code>.</p><table>{% for f in files %}<tr><td>{{ f }}</td><td><a href="{{ url_for('admin_backup', file=f) }}">download</a></td></tr>{% endfor %}</table>{% endblock %}

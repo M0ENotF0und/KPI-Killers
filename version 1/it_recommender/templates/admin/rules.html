@@ -1,0 +1,5 @@
+{% extends 'admin/layout.html' %}{% block content %}<h1>Rules</h1><table><tr><th>Type</th><th>Condition</th><th>Action</th><th>Active</th><th></th></tr>
+{% for r in rows %}<tr><td>{{ r.rule_type }}</td><td><code>{{ r.condition }}</code></td><td><code>{{ r.action }}</code></td><td>{{ 'Yes' if r.is_active else 'No' }}</td><td>
+{% for a in ['toggle','delete'] %}<form class="inline" method="post"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="rule_id" value="{{ r.rule_id }}"><input type="hidden" name="action" value="{{ a }}"><button class="btn sm {{ 'red' if a == 'delete' }}">{{ a }}</button></form> {% endfor %}</td></tr>{% endfor %}</table>
+<form method="post" class="card"><input type="hidden" name="csrf" value="{{ csrf }}"><input type="hidden" name="action" value="add"><b>Add rule</b><label>Type</label><input name="rule_type" required>
+<label>Condition (JSON)</label><input name="condition" required value='{"workload": "Heavy"}'><label>Action (JSON: min_ram, min_storage_gb)</label><input name="act" required value='{"min_ram": 16}'><p><button class="btn">Add</button></p></form>{% endblock %}

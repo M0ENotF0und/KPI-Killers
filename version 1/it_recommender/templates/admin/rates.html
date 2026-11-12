@@ -1,0 +1,5 @@
+{% extends 'admin/layout.html' %}{% block content %}<h1>Prices &amp; rates</h1><div class="card"><b>Current</b>: {% for k,v in cur.items() %}{{ k }} = {{ v.value }}{{ ' | ' if not loop.last }}{% endfor %}
+<form method="post" style="margin-top:10px"><input type="hidden" name="csrf" value="{{ csrf }}"><div class="grid g3"><div><label>Type</label><select name="type"><option value="fx_aed_kes">fx_aed_kes (KES per AED)</option><option value="duty">duty (fraction, e.g. 0.045)</option><option value="vat">vat (fraction)</option><option value="freight">freight (KES per unit)</option></select></div>
+<div><label>Value</label><input type="number" step="any" min="0" name="value" required></div><div><label>Effective date</label><input type="date" name="effective"></div></div><p><button class="btn">Add rate</button></p></form>
+<p class="muted">These rates drive every landed-cost calculation. Update them when FX, duty or VAT change.</p></div>
+<table><tr><th>Type</th><th>Value</th><th>Effective</th></tr>{% for r in rows %}<tr><td>{{ r.type }}</td><td>{{ r.value }}</td><td>{{ r.effective_date }}</td></tr>{% endfor %}</table>{% endblock %}

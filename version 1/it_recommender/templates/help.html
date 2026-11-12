@@ -1,0 +1,9 @@
+{% extends 'base.html' %}{% block body %}<h1>Help</h1>
+<div class="card"><h2>Getting recommendations</h2><ol><li>Register (Student, Business buyer or Consumer) and log in.</li><li>Fill in the scenario form: budget, preferred OS, storage and your role-specific details.</li>
+<li>Open a result to compare <b>Local</b> price with the <b>Dubai landed cost</b> (price + freight + duty + VAT).</li><li>Use <b>Save</b> to keep a laptop on your wishlist, <b>Save scenario</b> to revisit it, or <b>Export PDF</b>.</li></ol></div>
+<div class="card"><h2>Common messages</h2><table><tr><th>Message</th><th>What to do</th></tr>
+<tr><td>No laptops matched</td><td>Raise the budget, lower the minimum storage, or choose "No pref." for OS. Heavy workloads need 16GB RAM / 512GB.</td></tr>
+<tr><td>Invalid email or password</td><td>Check spelling, or use <a href="{{ url_for('forgot') }}">Forgot password</a>.</td></tr>
+<tr><td>Invalid form token</td><td>Your page was open too long. Reload it and resubmit.</td></tr>
+<tr><td>403 Forbidden</td><td>Your account type cannot open that page.</td></tr></table></div>
+<div class="card"><h2>Administrators</h2><p>Use the Admin console to manage the catalog (add, edit, delete, search, CSV import), prices and rates, rules, users, audit logs, reports and backups.</p></div>{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'admin/layout.html' %}{% block content %}<style>@media print{nav,.side,form,.noprint{display:none!important}.admin{display:block}}</style>
+<div class="card"><div style="display:flex;align-items:center;gap:10px"><span style="width:34px;height:34px;border-radius:50%;background:var(--yel);border:3px solid var(--navy);display:inline-block"></span><div><b style="font-size:20px">IT Recommender Ltd</b><br><span class="muted">Inventory &amp; landed-price report &middot; {{ now.strftime('%d %b %Y %H:%M') }}</span></div></div></div>
+<form method="get" class="card noprint" style="display:flex;gap:10px;align-items:end;flex-wrap:wrap"><div><label>Category</label><select name="category"><option value="">All</option>{% for c in ['Laptop','Accessory'] %}<option {{ 'selected' if cat == c }}>{{ c }}</option>{% endfor %}</select></div>
+<div><label>Hub</label><select name="hub"><option value="">All</option>{% for h in ['Local','Dubai'] %}<option {{ 'selected' if hub == h }}>{{ h }}</option>{% endfor %}</select></div>
+<div><label>Sort by</label><select name="sort">{% for k,l in [('price','Price (KES)'),('stock','Stock'),('model','Model')] %}<option value="{{ k }}" {{ 'selected' if sort == k }}>{{ l }}</option>{% endfor %}</select></div>
+<button class="btn">Apply</button><button type="button" class="btn sec" onclick="window.print()">Print / Save PDF</button></form>
+<table><tr><th>Item</th><th>Category</th><th>Vendor</th><th>Hub</th><th>Listed price</th><th>Price in KES (Dubai = landed)</th><th>Stock</th></tr>
+{% for r in rows %}<tr><td>{{ r.model }}</td><td>{{ r.category }}</td><td>{{ r.vendor }}</td><td>{{ r.hub }}</td><td>{{ r.currency }} {{ r.price|kes }}</td><td>{{ r.kes|kes }}</td><td>{{ r.stock_qty }}</td></tr>{% endfor %}
+<tr><th colspan="5">{{ rows|length }} item(s)</th><th colspan="2">Stock value: KES {{ total|kes }}</th></tr></table>{% endblock %}
