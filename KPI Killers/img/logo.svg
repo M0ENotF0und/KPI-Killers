@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="TechMatch logo">
+  <rect x="5" y="9" width="38" height="25" rx="4" fill="#101b33" stroke="#3fd5ea" stroke-width="2.5"/>
+  <path d="M2 38h44l-4 4H6z" fill="#3fd5ea"/>
+  <path d="M14 26l7-7 5 5 8-9" fill="none" stroke="#f5c542" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

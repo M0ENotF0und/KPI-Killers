@@ -1,5 +1,0 @@
-{% extends 'base.html' %}{% block body %}<div class="card auth"><h1>Create account</h1>
-<form method="post"><label>Full name</label><input name="full_name" required><label>Email</label><input type="email" name="email" required>
-<label>I am a...</label><select name="role" required>{% for r in roles %}<option value="{{ r }}">{{ {'student':'Student','business':'Business buyer','consumer':'Consumer'}[r] }}</option>{% endfor %}</select>
-<label>Password (min 8)</label><input type="password" name="password" minlength="8" required><label>Confirm password</label><input type="password" name="confirm" required>
-<p><button class="btn" style="width:100%">Register</button></p></form><a href="{{ url_for('login') }}">Back to login</a></div>{% endblock %}

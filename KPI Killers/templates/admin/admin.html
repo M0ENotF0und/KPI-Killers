@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin | TechMatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <script src="js/data.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/admin.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <a class="brand" href="index.html">
+      <img src="img/logo.svg" alt="" class="logo">
+      TechMatch
+    </a>
+    <p>The right tech at the right price.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recommend.html">Recommend</a></li>
+      <li><a href="products.html">Browse</a></li>
+      <li><a href="scenarios.html">My scenarios</a></li>
+      <li><a href="wishlist.html">Wishlist</a></li>
+      <li><a href="admin.html" id="admin-link" hidden>Admin</a></li>
+      <li><a href="login.html" id="auth-link">Login</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Admin console</h1>
+
+    <div id="admin-blocked" class="empty">
+      <h2>Admins only</h2>
+      <p>Log in with an admin account to manage the catalogue.</p>
+      <a class="btn" href="login.html">Log in</a>
+    </div>
+
+    <div id="admin-area" hidden>
+      <div class="admin-layout">
+        <div class="side" role="tablist" aria-label="Admin sections">
+          <button type="button" role="tab" data-target="catalog" aria-selected="true">Catalog</button>
+          <button type="button" role="tab" data-target="rates" aria-selected="false">Prices &amp; rates</button>
+          <button type="button" role="tab" data-target="audit" aria-selected="false">Audit logs</button>
+        </div>
+
+        <div>
+          <div class="stats">
+            <div class="stat"><span>Items</span><strong id="stat-items">0</strong></div>
+            <div class="stat alert"><span>Low stock alerts</span><strong id="stat-alerts">0</strong></div>
+            <div class="stat"><span>Last backup</span><strong>Not set up</strong></div>
+          </div>
+
+          <section data-tab="catalog">
+            <div class="toolbar">
+              <h2>Hardware catalog</h2>
+              <span>
+                <button type="button" class="btn-outline btn-small" disabled title="Coming later">Bulk import (CSV)</button>
+                <button type="button" class="btn-small" id="add-toggle">Add item</button>
+              </span>
+            </div>
+
+            <form id="add-form" class="panel" hidden style="margin-bottom:1rem">
+              <div class="form-grid">
+                <div><label for="a-brand">Brand</label><input id="a-brand" name="brand" required></div>
+                <div><label for="a-model">Model</label><input id="a-model" name="model" required></div>
+                <div><label for="a-desc">Plain-language description</label><input id="a-desc" name="description"></div>
+                <div><label for="a-cat">Category</label>
+                  <select id="a-cat" name="category"><option value="laptop">Laptop</option><option value="tablet">Tablet</option><option value="phone">Phone</option><option value="desktop">Desktop / mini PC</option><option value="monitor">Monitor</option><option value="office">Office hardware</option><option value="audio">Headphones</option><option value="storage">External storage</option><option value="mouse">Mouse</option><option value="keyboard">Keyboard</option></select></div>
+                <div><label for="a-local">Local price (KES)</label><input type="number" id="a-local" name="local" min="1" required></div>
+                <div><label for="a-dubai">Dubai price (KES)</label><input type="number" id="a-dubai" name="dubai" min="1" required></div>
+                <div><label for="a-kg">Weight (kg)</label><input type="number" id="a-kg" name="kg" min="0.1" step="0.1" value="1"></div>
+                <div><label for="a-stock">Stock</label><input type="number" id="a-stock" name="stock" min="0" value="0"></div>
+              </div>
+              <button type="submit">Save item</button>
+            </form>
+
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Item</th><th scope="col">Category</th><th scope="col" class="num">Price (KES)</th><th scope="col" class="num">Stock</th><th scope="col">Actions</th></tr></thead>
+                <tbody id="catalog-body"></tbody>
+              </table>
+            </div>
+            <p class="note">Changes are written to the audit log.</p>
+          </section>
+
+          <section data-tab="rates" hidden>
+            <h2>Import rates</h2>
+            <p class="note">These feed the Dubai landed cost. Check the current official rates before relying on them.</p>
+            <form id="rates-form" class="panel">
+              <label for="freight">Freight per kg (KES)</label>
+              <input type="number" id="freight" name="freight" min="0" required>
+              <label for="duty">Import duty (%)</label>
+              <input type="number" id="duty" name="duty" min="0" step="0.1" required>
+              <label for="vat">VAT (%)</label>
+              <input type="number" id="vat" name="vat" min="0" step="0.1" required>
+              <button type="submit">Save rates</button>
+              <p class="message" id="rates-message" aria-live="polite"></p>
+            </form>
+          </section>
+
+          <section data-tab="audit" hidden>
+            <h2>Audit log</h2>
+            <div class="table-scroll">
+              <table>
+                <thead><tr><th scope="col">Time</th><th scope="col">Who</th><th scope="col">Action</th></tr></thead>
+                <tbody id="audit-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>TechMatch, IS Project 2026.</p>
+    <p>Built by Sean Githongo and [partner name]. Prices shown are sample data.</p>
+  </footer>
+
+</body>
+</html>

@@ -1,5 +1,0 @@
-{% extends 'base.html' %}{% block body %}<h1>My scenarios</h1><div class="card"><table><tr><th>#</th><th>Budget (KES)</th><th>OS</th><th>Storage</th><th>Matches</th><th>Saved</th><th></th></tr>
-{% for r in rows %}<tr><td>{{ r.scenario_id }}</td><td>{{ r.budget_cap_kes|kes }}</td><td>{{ r.brand_os_pref }}</td><td>{{ r.storage_pref }}</td><td>{{ r.n }}</td><td>{{ 'Yes' if r.is_saved else '' }}</td>
-<td><a href="{{ url_for('results', sid=r.scenario_id) }}">View</a>
-<form class="inline" method="post" action="{{ url_for('scenario_action', sid=r.scenario_id, action='delete') }}" onsubmit="return confirm('Delete this scenario?')"><input type="hidden" name="csrf" value="{{ csrf }}"> <button class="btn red sm">Delete</button></form></td></tr>
-{% else %}<tr><td colspan="7">No scenarios yet. <a href="{{ url_for('scenario') }}">Create one</a></td></tr>{% endfor %}</table></div>{% endblock %}

@@ -1,92 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Ereteti Dairy Sacco</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account | TechMatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="img/favicon-edairy.png">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <script src="js/data.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/auth.js" defer></script>
 </head>
 <body>
 
-    <header>
-        <h1>Apply for membership</h1>
-        <p>Milk collected twice a day, on three routes out of Ngong.</p>
-    </header>
+  <header>
+    <a class="brand" href="index.html">
+      <img src="img/logo.svg" alt="" class="logo">
+      TechMatch
+    </a>
+    <p>The right tech at the right price.</p>
+  </header>
 
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="routes.html">Routes</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="register.html">Join</a></li>
-        <li><a href="deliveries.html">Deliveries</a></li>
-      </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recommend.html">Recommend</a></li>
+      <li><a href="products.html">Browse</a></li>
+      <li><a href="scenarios.html">My scenarios</a></li>
+      <li><a href="wishlist.html">Wishlist</a></li>
+      <li><a href="admin.html" id="admin-link" hidden>Admin</a></li>
+      <li><a href="login.html" id="auth-link">Login</a></li>
+    </ul>
+  </nav>
 
-    <main>
-      <p>
-        Any dairy farmer within reach of one of our three routes may apply to join Ereteti.
-        You will need your national ID number and a phone we can reach you on. Once your
-        membership number is issued you may deliver from that day, and you are paid once a
-        month for the litres we accept.
-      </p>
-
-      <form action="#" method="post">
-
-        <fieldset>
-          <legend>Your details</legend>
-
-          <label for="first-name">First name</label>
-          <input type="text" id="first-name" name="first_name" required>
-
-          <label for="last-name">Last name</label>
-          <input type="text" id="last-name" name="last_name" required>
-
-          <label for="national-id">National ID number</label>
-          <input type="text" id="national-id" name="national_id" required>
-
-          <label for="phone">Phone number</label>
-          <input type="tel" id="phone" name="phone"
-                 pattern="07[0-9]{8}"
-                 title="Ten digits, starting 07"
-                 placeholder="07XXXXXXXX"
-                 required>
-        </fieldset>
-
-        <fieldset>
-          <legend>Your route</legend>
-
-          <label for="route">Route</label>
-          <select id="route" name="route" required>
-            <option value="">Choose a route</option>
-            <option value="1">Kiserian route</option>
-            <option value="2">Ngong route</option>
-            <option value="3">Rongai route</option>
-          </select>
-
-          <label for="date-joined">Date of joining</label>
-          <input type="date" id="date-joined" name="date_joined"
-                 min="2026-09-24" required>
-        </fieldset>
-
-        <label for="rules">
-          <input type="checkbox" id="rules" name="rules" required>
-          I accept the sacco's rules
-        </label>
-
-        <button type="submit">Apply to join</button>
+  <main>
+    <div class="auth">
+      <div>
+        <h1>Create your account</h1>
+        <p>Pick the account type that fits you. It sets which questions we ask.</p>
+      </div>
+      <form class="card" id="register-form" novalidate>
+        <label for="name">Full name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+        <label for="role">Account type</label>
+        <select id="role" name="role" required>
+          <option value="student">Student</option>
+          <option value="business">Business buyer</option>
+          <option value="consumer">Everyday consumer</option>
+        </select>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <label for="confirm">Confirm password</label>
+        <input type="password" id="confirm" name="confirm" required>
+        <p class="message" id="register-message" aria-live="polite"></p>
+        <button type="submit">Create account</button>
+        <p class="note" style="margin-top:1rem">Already registered? <a href="login.html">Log in</a></p>
       </form>
-    </main>
+    </div>
+  </main>
 
-    <footer>
-        <p>Ereteti Dairy Sacco, PO Box 4021, Ngong.</p>
-        <p>Built by [TEAM NAMES], DBT 1305, 2026.</p>
-    </footer>
+  <footer>
+    <p>TechMatch, IS Project 2026.</p>
+    <p>Built by Sean Githongo and [partner name]. Prices shown are sample data.</p>
+  </footer>
 
 </body>
 </html>

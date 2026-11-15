@@ -2,89 +2,84 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Ereteti Dairy Sacco</title>
-  <meta name="viewport" 
-    content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home | TechMatch</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
   <link rel="stylesheet" href="css/style.css">
-  <!-- placeholder: swap for img/favicon.png -->
-  <link rel="icon" type="image/png"
-        href="img/favicon-edairy.png">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <script src="js/data.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/main.js" defer></script>
 </head>
 <body>
 
   <header>
-    <h1>
-      <!-- placeholder: swap for img/logo.png -->
-      <img src="img/logo-edairy.png"
-           alt="" class="logo">
-      Ereteti Dairy Sacco
-    </h1>
-    <p>Milk collected twice a day, on three routes
-       out of Ngong.</p>
+    <a class="brand" href="index.html">
+      <img src="img/logo.svg" alt="" class="logo">
+      TechMatch
+    </a>
+    <p>The right tech at the right price.</p>
   </header>
 
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="routes.html">Routes</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="register.html">Join</a></li>
-      <li><a href="deliveries.html">Deliveries</a>
-      </li>
+      <li><a href="recommend.html">Recommend</a></li>
+      <li><a href="products.html">Browse</a></li>
+      <li><a href="scenarios.html">My scenarios</a></li>
+      <li><a href="wishlist.html">Wishlist</a></li>
+      <li><a href="admin.html" id="admin-link" hidden>Admin</a></li>
+      <li><a href="login.html" id="auth-link">Login</a></li>
     </ul>
   </nav>
 
   <main>
-    <section>
-      <h2>Milk collected twice a day,
-          paid once a month</h2>
-      <p>Ereteti Dairy Sacco has collected milk on
-      the Ngong road since 1998. Around eight hundred
-      farmers deliver to us twice a day, and we pay
-      for every accepted litre once a month.</p>
-      <p>Any farmer on one of our three routes may
-      join. You need a national ID and a bank account,
-      and you may deliver from the day your
-      membership number is issued.</p>
+    <section class="hero">
+      <div>
+        <h1>Right tech. Right price.</h1>
+        <p>Tell us who you are and what you can spend. We match you to hardware that fits, then compare buying locally with importing from Dubai, with freight, duty and VAT counted in.</p>
+        <div class="actions">
+          <a class="btn" href="recommend.html">Get recommendations</a>
+          <a class="btn btn-outline" href="login.html">Log in</a>
+        </div>
+      </div>
+      <figure class="sample">
+        <div class="bars" role="img" aria-label="Sample chart: local price against Dubai landed price for three laptops">
+          <div class="bar-pair"><div class="bar local" style="height:62%"></div><div class="bar dubai" style="height:52%"></div></div>
+          <div class="bar-pair"><div class="bar local" style="height:90%"></div><div class="bar dubai" style="height:78%"></div></div>
+          <div class="bar-pair"><div class="bar local" style="height:72%"></div><div class="bar dubai" style="height:74%"></div></div>
+        </div>
+        <div class="legend"><span><span class="dot local"></span>Local price</span><span><span class="dot dubai"></span>Dubai landed</span></div>
+        <figcaption>Sample only. Sometimes importing wins, sometimes it does not.</figcaption>
+      </figure>
     </section>
 
     <section>
-      <h2>Where we collect</h2>
-      <ul class="route-cards">
-        <li><a href="routes.html">Kiserian route</a>
-        </li>
-        <li><a href="routes.html">Ngong route</a></li>
-        <li><a href="routes.html">Rongai route</a></li>
+      <h2>Who is it for?</h2>
+      <ul class="persona-cards">
+        <li><a href="recommend.html?role=student"><strong>College student</strong><span>Laptops, note-taking tablets, noise-cancelling headphones, storage and ergonomic mice, matched to your course.</span></a></li>
+        <li><a href="recommend.html?role=business"><strong>Business buyer</strong><span>Desktops, monitors and office hardware for your field and department, in the quantities you need.</span></a></li>
+        <li><a href="recommend.html?role=consumer"><strong>Everyday consumer</strong><span>Phones, home PCs and everyday gear for home, work-from-home or fun.</span></a></li>
       </ul>
-      <img src="img/collection-centre.jpg"
-           alt="Farmers queuing with churns at
-                the Kiserian centre">
     </section>
+
+    <section>
+      <h2>How it works</h2>
+      <ol class="steps">
+        <li>Choose who you are and what you need: laptop, tablet or peripheral.</li>
+        <li>Set your budget, preferred system and comfort needs like battery or weight.</li>
+        <li>Compare the best matches, local against Dubai, and save your favourites.</li>
+      </ol>
+    </section>
+
+    <p class="note">Landed cost is an estimate. It leaves out warranty differences and customs clearing fees.</p>
   </main>
 
-  <aside>
-    <h2>Notices</h2>
-    <ul>
-      <li>Milk is paid at
-          <strong>KSh 52.00 a litre</strong>
-          from 1 October 2026.</li>
-      <li>Annual General Meeting: Saturday
-          17 October, 10 a.m., at the
-          Kiserian collection centre.</li>
-      <li>New members:
-          <a href="register.html">apply to join</a>.
-          You need a national ID and a
-          bank account.</li>
-    </ul>
-  </aside>
-
   <footer>
-    <p>Ereteti Dairy Sacco, PO Box 4021, Ngong.</p>
-    <p>Built by [TEAM NAMES], DBT 1305, 2026.</p>
+    <p>TechMatch, IS Project 2026.</p>
+    <p>Built by Sean Githongo and [partner name]. Prices shown are sample data.</p>
   </footer>
 
 </body>

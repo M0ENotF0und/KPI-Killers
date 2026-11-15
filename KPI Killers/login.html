@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in | TechMatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <script src="js/data.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/auth.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <a class="brand" href="index.html">
+      <img src="img/logo.svg" alt="" class="logo">
+      TechMatch
+    </a>
+    <p>The right tech at the right price.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recommend.html">Recommend</a></li>
+      <li><a href="products.html">Browse</a></li>
+      <li><a href="scenarios.html">My scenarios</a></li>
+      <li><a href="wishlist.html">Wishlist</a></li>
+      <li><a href="admin.html" id="admin-link" hidden>Admin</a></li>
+      <li><a href="login.html" id="auth-link">Login</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="auth">
+      <div>
+        <h1>TechMatch</h1>
+        <p>Log in to save scenarios and build a wishlist. Your account decides what you can see.</p>
+      </div>
+      <form class="card" id="login-form" novalidate>
+        <h2>Welcome back</h2>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="name@email.com" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="At least 6 characters" required>
+        <p class="message" id="login-message" aria-live="polite"></p>
+        <button type="submit">Log in</button>
+        <p class="note" style="margin-top:1rem">New here? <a href="register.html">Create account</a></p>
+        <p class="note">Demo admin: admin@techmatch.app with any 6+ character password.</p>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>TechMatch, IS Project 2026.</p>
+    <p>Built by Sean Githongo and [partner name]. Prices shown are sample data.</p>
+  </footer>
+
+</body>
+</html>

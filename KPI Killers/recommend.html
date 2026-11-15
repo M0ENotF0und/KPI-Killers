@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recommend | TechMatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/recommend.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <a class="brand" href="index.html">
+      <img src="img/logo.svg" alt="" class="logo">
+      TechMatch
+    </a>
+    <p>The right tech at the right price.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recommend.html">Recommend</a></li>
+      <li><a href="products.html">Browse</a></li>
+      <li><a href="scenarios.html">My scenarios</a></li>
+      <li><a href="wishlist.html">Wishlist</a></li>
+      <li><a href="admin.html" id="admin-link" hidden>Admin</a></li>
+      <li><a href="login.html" id="auth-link">Login</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h1>Your scenario</h1>
+    <p>Answer a few questions and we will find the best matches for your budget.</p>
+
+    <form id="scenario-form" novalidate>
+
+      <fieldset>
+        <legend>Who is this for?</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="role" value="student" checked><span>College student</span></label>
+          <label class="chip"><input type="radio" name="role" value="business"><span>Business buyer</span></label>
+          <label class="chip"><input type="radio" name="role" value="consumer"><span>Everyday consumer</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>What you need</legend>
+        <div class="form-grid">
+          <div>
+            <label for="category">Device</label>
+            <select id="category" name="category" required>
+              <option value="laptop" data-role="student business consumer">Laptop</option>
+              <option value="tablet" data-role="student consumer">Tablet</option>
+              <option value="phone" data-role="consumer">Phone</option>
+              <option value="desktop" data-role="business consumer">Desktop / mini PC</option>
+              <option value="monitor" data-role="business consumer">Monitor</option>
+              <option value="office" data-role="business consumer">Office hardware (printer, scanner, router, UPS)</option>
+              <option value="audio" data-role="student consumer">Noise-cancelling headphones</option>
+              <option value="storage" data-role="student consumer">External storage</option>
+              <option value="mouse" data-role="student consumer">Mouse (ergonomic and everyday)</option>
+              <option value="keyboard" data-role="student consumer">Keyboard</option>
+            </select>
+            <p class="note" id="role-hint"></p>
+          </div>
+
+          <div data-role="student">
+            <label for="course">Course</label>
+            <select id="course" name="course" required></select>
+            <p class="message" data-for="course" aria-live="polite"></p>
+          </div>
+
+          <div data-role="business">
+            <label for="industry">Field / industry</label>
+            <select id="industry" name="industry" required>
+              <option value="">Select your field</option>
+              <option>Retail & Trade</option>
+              <option>Education</option>
+              <option>Finance & Banking</option>
+              <option>Health</option>
+              <option>Agriculture</option>
+              <option>Manufacturing</option>
+              <option>Technology</option>
+              <option>Hospitality</option>
+              <option>Other</option>
+            </select>
+            <p class="message" data-for="industry" aria-live="polite"></p>
+          </div>
+
+          <div data-role="business">
+            <label for="department">Department</label>
+            <select id="department" name="department" required></select>
+            <p class="message" data-for="department" aria-live="polite"></p>
+          </div>
+
+          <div data-role="business">
+            <label for="units">Number of units</label>
+            <input type="number" id="units" name="units" min="1" value="1" required>
+            <p class="message" data-for="units" aria-live="polite"></p>
+          </div>
+
+          <div data-role="consumer" data-cat="laptop tablet phone desktop">
+            <label for="usecase">Main use</label>
+            <select id="usecase" name="usecase" required></select>
+            <p class="message" data-for="usecase" aria-live="polite"></p>
+          </div>
+
+          <div data-cat="laptop tablet phone desktop">
+            <label for="workload">Workload</label>
+            <select id="workload" name="workload" required>
+              <option value="">Select workload</option>
+              <option value="light">Light: documents, browsing, video calls</option>
+              <option value="moderate">Moderate: multitasking, spreadsheets, light editing</option>
+              <option value="heavy">Heavy: coding, design, video, gaming</option>
+            </select>
+            <p class="message" data-for="workload" aria-live="polite"></p>
+          </div>
+        </div>
+        <p class="note" id="suggestion" aria-live="polite"></p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Budget</legend>
+        <label for="budget">Total budget (KES)</label>
+        <input type="number" id="budget" name="budget" min="1" step="1000" value="100000" required>
+        <input type="range" id="budget-range" min="1000" max="400000" step="1000" value="100000" aria-label="Budget slider">
+        <p class="budget-readout" id="budget-readout"></p>
+        <p class="note">Covers the device and any matching accessories in your bundle. Business buyers: this is per unit.</p>
+        <p class="message" data-for="budget" aria-live="polite"></p>
+      </fieldset>
+
+      <fieldset data-auto>
+        <legend>Preferences (optional)</legend>
+        <div class="form-grid">
+          <div data-cat="laptop tablet phone desktop monitor office audio storage mouse keyboard">
+            <label>Preferred brands</label>
+            <div class="chips" id="brand-chips"></div>
+            <p class="note">Leave all unticked to see every brand.</p>
+          </div>
+          <div data-cat="laptop tablet phone desktop">
+            <label class="check"><input type="checkbox" name="bundle" checked> Build a bundle with matching accessories</label>
+            <p class="note">We add accessories such as a mouse, headphones, storage or a monitor that fit what is left of your budget.</p>
+          </div>
+          <div data-cat="laptop tablet phone desktop">
+            <label>Operating system</label>
+            <div class="chips">
+          <label class="chip" data-cat="laptop tablet phone desktop"><input type="radio" name="os" value="any" checked><span>Any / all</span></label>
+          <label class="chip" data-cat="laptop desktop"><input type="radio" name="os" value="Windows"><span>Windows</span></label>
+          <label class="chip" data-cat="laptop desktop"><input type="radio" name="os" value="macOS"><span>macOS</span></label>
+          <label class="chip" data-cat="laptop desktop"><input type="radio" name="os" value="Linux"><span>Linux</span></label>
+          <label class="chip" data-cat="tablet phone"><input type="radio" name="os" value="Android"><span>Android</span></label>
+          <label class="chip" data-cat="tablet phone"><input type="radio" name="os" value="iOS"><span>iOS / iPadOS</span></label>
+            </div>
+          </div>
+          <div data-cat="laptop tablet phone desktop storage">
+            <label>Storage</label>
+            <div class="chips">
+          <label class="chip" data-cat="laptop tablet phone desktop storage"><input type="radio" name="storage" value="0" checked><span>Any</span></label>
+          <label class="chip" data-cat="tablet phone"><input type="radio" name="storage" value="128"><span>128 GB</span></label>
+          <label class="chip" data-cat="laptop tablet phone desktop storage"><input type="radio" name="storage" value="256"><span>256 GB</span></label>
+          <label class="chip" data-cat="laptop tablet phone desktop storage"><input type="radio" name="storage" value="512"><span>512 GB</span></label>
+          <label class="chip" data-cat="laptop tablet desktop storage"><input type="radio" name="storage" value="1024"><span>1 TB+</span></label>
+          <label class="chip" data-cat="storage"><input type="radio" name="storage" value="2048"><span>2 TB+</span></label>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset data-auto>
+        <legend>Comfort and features (optional)</legend>
+        <div class="chips">
+          <label class="chip" data-cat="laptop tablet phone audio"><input type="checkbox" name="ergo" value="light"><span>Light weight</span></label>
+          <label class="chip" data-cat="laptop tablet phone monitor"><input type="checkbox" name="ergo" value="screen"><span>Big / quality screen</span></label>
+          <label class="chip" data-cat="laptop tablet phone audio"><input type="checkbox" name="ergo" value="battery"><span>Long battery</span></label>
+          <label class="chip" data-cat="mouse keyboard monitor office"><input type="checkbox" name="ergo" value="ergonomic"><span>Ergonomic design</span></label>
+          <label class="chip" data-cat="audio"><input type="checkbox" name="ergo" value="noise"><span>Noise cancelling</span></label>
+        </div>
+      </fieldset>
+
+      <button type="submit">Get recommendations</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>TechMatch, IS Project 2026.</p>
+    <p>Built by Sean Githongo and [partner name]. Prices shown are sample data.</p>
+  </footer>
+
+</body>
+</html>

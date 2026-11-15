@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Results | TechMatch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+  <script src="js/data.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/render.js" defer></script>
+  <script src="js/results.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <a class="brand" href="index.html">
+      <img src="img/logo.svg" alt="" class="logo">
+      TechMatch
+    </a>
+    <p>The right tech at the right price.</p>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="recommend.html">Recommend</a></li>
+      <li><a href="products.html">Browse</a></li>
+      <li><a href="scenarios.html">My scenarios</a></li>
+      <li><a href="wishlist.html">Wishlist</a></li>
+      <li><a href="admin.html" id="admin-link" hidden>Admin</a></li>
+      <li><a href="login.html" id="auth-link">Login</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div id="results-empty" class="empty" hidden>
+      <h1>No scenario yet</h1>
+      <p>Tell us what you need first, and your matches will appear here.</p>
+      <a class="btn" href="recommend.html">Start a scenario</a>
+    </div>
+
+    <div id="results-area" hidden>
+      <h1>Your TechMatch results</h1>
+      <p id="summary" class="note"></p>
+      <p id="source-note" class="note" hidden>Showing sample products and specifications until the TechMatch backend is connected.</p>
+
+      <div id="no-match" class="empty" hidden>
+        <h2>Nothing fits those answers</h2>
+        <p>No product matches everything you chose. Try a higher budget, fewer brands, a lighter workload or "Any / all" for the system.</p>
+        <a class="btn" href="recommend.html">Change scenario</a>
+      </div>
+
+      <div id="results-body" hidden>
+        <section class="panel filters" aria-label="Filter results">
+          <h2>Filter results</h2>
+          <div class="filter-grid">
+            <div id="f-brands-wrap"><label>Brand</label><div class="chips" id="f-brands"></div></div>
+            <div id="f-ram-wrap">
+              <label for="f-ram">Memory</label>
+              <select id="f-ram">
+                <option value="0">Any</option>
+                <option value="8">8 GB or more</option>
+                <option value="16">16 GB or more</option>
+                <option value="32">32 GB or more</option>
+              </select>
+            </div>
+            <div id="f-gpu-wrap"><label class="check"><input type="checkbox" id="f-gpu"> Dedicated graphics only</label></div>
+            <div>
+              <label for="f-sort">Sort by</label>
+              <select id="f-sort"></select>
+            </div>
+          </div>
+          <p class="note" id="count" aria-live="polite"></p>
+        </section>
+
+        <section>
+          <h2>Best matches</h2>
+          <div class="rec-cards" id="cards"></div>
+        </section>
+
+        <section id="detail" class="detail" aria-live="polite"></section>
+
+        <section class="panel chart">
+          <h2>Local vs Dubai landed cost, per bundle</h2>
+          <div class="bars" id="bars"></div>
+          <div class="chart-cols" id="bar-labels"></div>
+          <div class="legend"><span><span class="dot local"></span>Everything local</span><span><span class="dot dubai"></span>Everything from Dubai, landed</span></div>
+        </section>
+
+        <div class="actions">
+          <button type="button" class="btn-outline" id="export-pdf">Export PDF</button>
+          <button type="button" id="save-scenario">Save scenario</button>
+        </div>
+        <p class="message" id="save-message" aria-live="polite"></p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>TechMatch, IS Project 2026.</p>
+    <p>Built by Sean Githongo and [partner name]. Prices shown are sample data.</p>
+  </footer>
+
+</body>
+</html>
